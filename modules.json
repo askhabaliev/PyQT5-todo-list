@@ -1,0 +1,10 @@
+{
+    "test":
+        {
+          "is_active": true,
+          "file_name": "gui_modules",
+          "class_name": "TestClass",
+          "init_args": {},
+          "prep_args": {}
+        }
+}
