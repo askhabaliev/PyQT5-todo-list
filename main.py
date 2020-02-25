@@ -14,13 +14,10 @@ from core import Core
 
 import PyQt5
 
-
-
 dir_path = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(dir_path, 'modules.json')
 with open(config_path, 'r') as modules_config:
     MODULES_CONFIG = json.load(modules_config, object_pairs_hook=OrderedDict)
-
 
 def main():
 	app = QApplication(sys.argv)
@@ -50,8 +47,6 @@ def main():
 	core.main_screen.show()
 
 	sys.exit(app.exec_())
-
-
 
 if __name__ == "__main__":
 	main()
