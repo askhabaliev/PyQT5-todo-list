@@ -1,10 +1,43 @@
 {
-    "test":
-        {
-          "is_active": true,
-          "file_name": "gui_modules",
-          "class_name": "TestClass",
-          "init_args": {},
-          "prep_args": {}
+    "machine_state_management":
+    	{
+        	"is_active": true,
+        	"file_name": "gui_modules",
+        	"class_name": "MachineStateManagement",
+        	"init_args": {},
+        	"prep_args": {
+                "color": "#FDE910",
+                "font_size": "20px",
+                "text_transform": "uppercase",
+                "font_weight": "bold",
+        		"main_sm": {
+        		  "Главный автомат":
+        		      {
+        		          "idle": "Ожидание", "moving": "Езда", "leveling": "Выравнивание", "tower_tilt": "Управление мачтой", "drilling": "Бурение",
+        		          "shaft_buildup": "Наращивание", "shaft_stow": "Снятие штанги", "grounding": "Снятие домкратов", "remote_wait": "Ожидание ДУ",
+        		          "remote_prepare": "Подготовка к ДУ", "remote": "ДУ", "end_remote": "Окончание ДУ", "calib": "Калибровка", "pre_calib": "Подготовка к калибровке",
+        		          "post_calib": "Окончание калибровки", "wait_before_drill": "Ожидание бурения", "restore_string": "Подъем става", "wait_before_lavel": "Ожидаие выравнивания"
+        		      },
+        		  "Автомат мачты":
+        		      {
+        		          "idle": "Ожидание", "locking": "Выдвижение штатива", "unlocking": "Втягивание штатива", "arm_closing": "Закрытие люнета",
+        		          "tilt_regulation": "Наклон мачты", "failure": "Ошибка"
+        		      },
+        		  "Автомат бурения":
+        		      {
+        		          "idle": "Ожидание", "touchdown": "Касание земли", "overburden_pass": "Бурение вскрыши", "drilling": "Бурение", "hard_rot": "Застревание",
+        		          "pullup": "Осыпание", "after_pullup": "После осыпания", "raise": "Подъем става", "rod_align": "Калибровка", "failure": "Ошибка",
+        		          "wait_after_drill": "Окончание бурения", "pass_soft": "Мягкая порода", "unstuck": "Освобождение"
+        		      },
+        		  "Автомат люнета":
+        		      {
+        		          "opening": "Открытие", "open": "Открыт", "closing": "Закрытие", "closed": "Закрыт", "failure": "Ошибка"
+        		      },
+        		  "Автомат выравнивания": 
+        		      {
+        		          "pulling": "Вытягивание домкратов", "pulled": "Домкраты втянуты", "leveling": "Выравнивание", "holding": "Удерживание"
+        		      }
+        		  }
+        	}
         }
 }
