@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import (QVBoxLayout, QLabel, QPushButton,
 
 import threading
 
-
 class MachineStateManagement(object):
     def __init__(self, core):
         super().__init__()
@@ -27,8 +26,8 @@ class MachineStateManagement(object):
         self.confirm_params = dict(confirm_params)
         self.sm = sm
         self.widget = QWidget(self.core_screen)
-        self.widget.setFixedSize(500,250)
-        self.widget.move(400,250)
+        self.widget.setFixedSize(self.widget_params["width"], self.widget_params["height"])
+        self.widget.move(self.widget_params["x"], self.widget_params["y"])
 
         for k in self.sm:
             m_name = list(self.sm[k])[0]
@@ -48,8 +47,8 @@ class MachineStateManagement(object):
 
     def prep_confirm(self, index):
         currentText = self.widget.sender()
-        node_choice = None
-        current_sm = None
+        self.node_choice = None
+        self.current_sm = None
 
         for k in self.combo:
             self.combo[k].setEnabled(False)
@@ -71,10 +70,10 @@ class MachineStateManagement(object):
         for key, val in self.combo.items():
             if val == currentText:
                 sm_name = [list(self.sm[k][key]) for k in self.sm if list(self.sm[k])[0] == key][0]
-                current_sm = sm_name[index]
-                node_choice = key
+                self.current_sm = sm_name[index]
+                self.node_choice = [ k for k in self.sm if list(self.sm[k])[0] == key ][0]
 
-        btn_ok.clicked.connect(lambda: self.btn_ok_clicked(node_choice, current_sm))
+        btn_ok.clicked.connect(self.btn_ok_clicked)
         btn_no.clicked.connect(self.btn_no_clicked)
 
         layout.addWidget(btn_ok)
@@ -84,14 +83,16 @@ class MachineStateManagement(object):
         self.confirm.setFixedSize(300, 90)
         self.confirm.setStyleSheet("background: %s;" % (self.confirm_params["background"]))
         self.confirm.setWindowFlags(Qt.CustomizeWindowHint)
+        self.confirm.setWindowOpacity(1)
         self.confirm.show()
 
-    def btn_ok_clicked(self, node_choice, current_sm):
-    	print(node_choice, current_sm)
-    	# self.core.output_data = {"local_sim": {"set_state": {"sm_name": node_choice, "state_name": current_sm}}}
-    	self.confirm.hide()
-    	for k in self.combo:
-    		self.combo[k].setEnabled(True)
+    def btn_ok_clicked(self):
+        vehid = self.core.watched_vehid or self.core.in_rc_vehid
+        print(self.node_choice, self.current_sm)
+        self.core.output_data = {vehid: {"set_state": {"sm_name": self.node_choice, "state_name": self.current_sm}}}
+        self.confirm.hide()
+        for k in self.combo:
+            self.combo[k].setEnabled(True)
 
     def btn_no_clicked(self):
         self.confirm.hide()
@@ -99,7 +100,4 @@ class MachineStateManagement(object):
             self.combo[k].setEnabled(True)
 
     def start(self):
-    	pass
-
-
-
+        pass
