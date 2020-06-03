@@ -16,7 +16,7 @@ import PyQt5
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(dir_path, 'modules.json')
-with open(config_path, 'r') as modules_config:
+with open(config_path, 'r', encoding="utf-8") as modules_config:
     MODULES_CONFIG = json.load(modules_config, object_pairs_hook=OrderedDict)
 
 def main():
